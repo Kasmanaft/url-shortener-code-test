@@ -55,4 +55,26 @@ describe UrlsController, type: :controller do
       expect(response).to have_http_status(:bad_request)
     end
   end
+
+  describe '#show' do
+    it 'should return error http status if path not found' do
+      get :show, params: { id: 'something-not-a-6-symbol' }
+      expect(response).to have_http_status(:not_found)
+    end
+
+    it 'should return redirect status 301 if url was found' do
+      post :create, params: {"url": 'http://www.farmdrop144.com'}, as: 'json'
+      short_url = JSON.parse(response.body)['short_url']
+      get :show, params: { id: short_url.reverse.chop.reverse }
+      expect(response).to have_http_status(301)
+    end
+
+    it 'should redirect to found url if everything is ok' do
+      post :create, params: {"url": 'http://www.farmdrop144.com'}, as: 'json'
+      short_url = JSON.parse(response.body)['short_url']
+      expect(
+        get :show, params: { id: short_url.reverse.chop.reverse }
+      ).to redirect_to('http://www.farmdrop144.com')
+    end
+  end
 end
