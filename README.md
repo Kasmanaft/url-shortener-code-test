@@ -1,9 +1,9 @@
 ## Getting Started
 
 Clone the repository.
-Run 'bundle update/install' as necessary.
+Run 'bundle install'.
+Check tests with 'rspec'.
 Run 'bin/rails server' to start the Rails development server.
-Navigate to http://localhost:3000 in your browser.
 
 # Url Shortener Code Test
 
