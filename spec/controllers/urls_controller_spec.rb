@@ -65,7 +65,7 @@ describe UrlsController, type: :controller do
     it 'should return redirect status 301 if url was found' do
       post :create, params: {"url": 'http://www.farmdrop144.com'}, as: 'json'
       short_url = JSON.parse(response.body)['short_url']
-      get :show, params: { id: short_url.reverse.chop.reverse }
+      get :show, params: { id: short_url[1..-1] }
       expect(response).to have_http_status(301)
     end
 
@@ -73,7 +73,7 @@ describe UrlsController, type: :controller do
       post :create, params: {"url": 'http://www.farmdrop144.com'}, as: 'json'
       short_url = JSON.parse(response.body)['short_url']
       expect(
-        get :show, params: { id: short_url.reverse.chop.reverse }
+        get :show, params: { id: short_url[1..-1] }
       ).to redirect_to('http://www.farmdrop144.com')
     end
   end

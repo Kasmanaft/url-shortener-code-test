@@ -37,5 +37,28 @@ describe Url do
       url = Url.new('http://abcd.efg')
       expect(url.short_url).to eq(seen_url)
     end
+
+    it 'should call #generate_new_short_url when the same short_url already exists' do
+      @url = Url.new('http://abcd.efg.klm')
+      fire_method = @url.method(:generate_new_short_url)
+      @fired = 0
+      @previous_url = @url.short_url[1..-1]
+      expect(@url).to receive(:generate_new_short_url) do
+        if @fired < 3
+          @fired += 1
+          @previous_url
+        else
+          fire_method.call
+        end
+      end.exactly(4).times
+      @url.full_url = 'http://something.new'
+    end
+  end
+
+  describe '#generate_new_short_url' do
+    it 'should create string with 6 symbols' do
+      url = Url.new('')
+      expect(url.generate_new_short_url).to match /^[a-zA-Z0-9\-_]{6}$/
+    end
   end
 end

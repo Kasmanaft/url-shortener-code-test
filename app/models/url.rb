@@ -21,10 +21,17 @@ class Url
 
   def full_url=(url)
     @full_url = url
-    if @@urls_store[url].nil?
-      @@urls_store[url] = SecureRandom.urlsafe_base64(6, false)[0..5]
-    end
     @short_url = @@urls_store[url]
+    if @short_url.nil?
+      begin
+        @short_url = generate_new_short_url
+      end while @@urls_store.value?(@short_url)
+      @@urls_store[url] = @short_url
+    end
+  end
+
+  def generate_new_short_url
+    SecureRandom.urlsafe_base64(6, false)[0..5]
   end
 
   def self.find(short_url)
