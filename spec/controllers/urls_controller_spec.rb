@@ -22,7 +22,7 @@ describe UrlsController, type: :controller do
       it 'should return back shortened url' do
         post :create, params: {"url": 'http://www.farmdrop.com'}, as: 'json'
         parsed_body = JSON.parse(response.body)
-        expect(parsed_body["short_url"]).to match /^\/[a-zA-Z0-9]{6}$/
+        expect(parsed_body["short_url"]).to match /^\/[a-zA-Z0-9\-_]{6}$/
       end
 
       it 'should return different shortened url for different urls' do

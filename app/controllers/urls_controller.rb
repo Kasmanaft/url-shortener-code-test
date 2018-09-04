@@ -7,7 +7,7 @@ class UrlsController < ApplicationController
 
       render json: {
         short_url:  @url.short_url,
-        url:        @url.url
+        url:        @url.full_url
       }
     end
   end
