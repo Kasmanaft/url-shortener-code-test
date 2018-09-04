@@ -41,7 +41,7 @@ describe UrlsController, type: :controller do
         expect(parsed_first_body["short_url"]).to eq(parsed_second_body["short_url"])
       end
 
-      it 'should return the same different shortened url for same urls, even if we have letters in different cases' do
+      it 'should return the same shortened url for the same urls, even if we have letters in different cases' do
         post :create, params: {"url": 'http://www.farmdrop.com'}, as: 'json'
         parsed_first_body = JSON.parse(response.body)
         post :create, params: {"url": 'http://www.fArMDrop.com'}, as: 'json'
