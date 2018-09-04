@@ -1,3 +1,10 @@
+## Getting Started
+
+Clone the repository.
+Run 'bundle update/install' as necessary.
+Run 'bin/rails server' to start the Rails development server.
+Navigate to http://localhost:3000 in your browser.
+
 # Url Shortener Code Test
 
 Without using an external database, we'd like you to create a URL shortening
