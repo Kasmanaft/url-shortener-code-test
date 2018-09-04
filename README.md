@@ -9,7 +9,7 @@ shareable between different clients while the server is running.
   the orignal URL, as in the following curl example:
 
 ```
-curl localhost:4000 -XPOST -d '{ "url": "http://www.farmdrop.com" }'
+curl localhost:3000 -XPOST -d '{ "url": "http://www.farmdrop.com" }' -H "Content-Type: application/json"
 { "short_url": "/abc123", "url": "http://www.farmdrop.com" }
 ```
 
@@ -18,7 +18,7 @@ curl localhost:4000 -XPOST -d '{ "url": "http://www.farmdrop.com" }'
   to the POSTed URL, as shown in the following curl example:
 
 ```
-curl -v localhost:4000/abc123
+curl -v localhost:3000/abc123
 ...
 < HTTP/1.1 301 Moved Permanently
 ...
